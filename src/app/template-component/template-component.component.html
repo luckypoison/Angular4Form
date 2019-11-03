@@ -1,0 +1,17 @@
+<form #myForm="ngForm" (ngSubmit)="onSubmit()" >
+    <div> 用户名：<input type="text" #username="ngModel" ngModel name="username" /></div>
+    <div ngModelGroup="detail">
+      <div>微信号：<input type="text" ngModel name="weChatId"/></div>
+      <div> 手机号：<input type="text" ngModel name="phone"/></div>
+    </div>
+    <div> 密码：<input type="password" ngModel name="password" /></div>
+    <div> 确认密码：<input type="password" ngModel name="rePassword" /></div>
+    <button type="submit">发送</button>
+</form>
+<div>
+  <!--获取表单中所有标有了ngModel属性的值-->
+  {{myForm.value | json}}
+  <!--我们在username的输入框中又绑定了一个username的属性绑定，这个绑定意味着我们可以单独拿出username的值来-->
+  <br/>
+  {{username.value}}
+</div>

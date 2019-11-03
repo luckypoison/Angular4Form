@@ -1,0 +1,18 @@
+
+<!--这里需要注意的是formGroup因为在conponent中有属性绑定所以需要加上括号-->
+<form [formGroup]="formModel" (ngSubmit)="onSubmit()" >
+  <!--formGroupName不需要加括号，是因为它是隶属于最外层formGroup中的一个元素-->
+  <div formGroupName="time" >
+    开始日期：<input type="date" formControlName="from"/>
+    截止日期：<input type="date" formControlName="to"/>
+  </div>
+  <div formArrayName="hobbies">
+    <ul>
+      <li *ngFor="let item of this.formModel.get('hobbies').controls; let i = index;">
+        兴趣爱好：<input type="text" [formControlName]="i"/>
+      </li>
+    </ul>
+    <button (click)="addHobby()" >添加爱好</button>
+  </div>
+  <button type="submit">提交</button>
+</form>

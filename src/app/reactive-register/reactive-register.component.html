@@ -1,0 +1,13 @@
+<form [formGroup] = "formModel" (ngSubmit)="onSubmit()" >
+    <div> 用户名：<input type="text" formControlName="username"/></div>
+    <!--hasError方法一共需要填入两个参数，第一个是你检验器返回的结果中的key的名字，而不是校验器的方法名-->
+    <!--第二个参数就是你要监控哪一个参数校验，就是formControlName的名称-->
+    <div [hidden] = "!formModel.hasError('required', 'username')" style=" color: red;font-size: 0.5em;">username 是必填项</div>
+    <div [hidden] = "!formModel.hasError('minlength', 'username')" style=" color: red;font-size: 0.5em;">username 的长度必须要大于6</div>
+    <div> 手机号：<input type="text" formControlName="phone"/></div>
+    <div formGroupName="passwordGroup">
+        <div> 密码：<input type="password" formControlName="password"/></div>
+        <div> 确认密码：<input type="password" formControlName="confirmPassword"/></div>
+    </div>
+    <button type="submit">发送</button>
+</form>
