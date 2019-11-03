@@ -1,11 +1,15 @@
 <form [formGroup] = "formModel" (ngSubmit)="onSubmit()" >
     <div> 用户名：<input type="text" formControlName="username"/></div>
-    <!--hasError方法一共需要填入两个参数，第一个是你检验器返回的结果中的key的名字，而不是校验器的方法名-->
-    <!--第二个参数就是你要监控哪一个参数校验，就是formControlName的名称-->
-    <div [hidden] = "!formModel.hasError('required', 'username')" style=" color: red;font-size: 0.5em;">username 是必填项</div>
-    <div [hidden] = "!formModel.hasError('minlength', 'username')" style=" color: red;font-size: 0.5em;">username 的长度必须要大于6</div>
+    <div [hidden]="formModel.get('username').valid || formModel.get('username').untouched">
+        <!--hasError方法一共需要填入两个参数，第一个是你检验器返回的结果中的key的名字，而不是校验器的方法名-->
+        <!--第二个参数就是你要监控哪一个参数校验，就是formControlName的名称-->
+        <div [hidden] = "!formModel.hasError('required', 'username')" style=" color: red;font-size: 0.5em;">username 是必填项</div>
+        <div [hidden] = "!formModel.hasError('minlength', 'username')" style=" color: red;font-size: 0.5em;">username 的长度必须要大于6</div>
+    </div>
     <div> 手机号：<input type="text" formControlName="phone"/></div>
-    <div [hidden] = "!formModel.hasError('mobileValid', 'phone')" style=" color: red;font-size: 0.5em;">{{formModel.getError('mobileValid', 'phone')?.msg}}</div>
+    <div [hidden]="formModel.get('phone').valid || formModel.get('phone').untouched">
+        <div [hidden] = "!formModel.hasError('mobileValid', 'phone')" style=" color: red;font-size: 0.5em;">{{formModel.getError('mobileValid', 'phone')?.msg}}</div>
+    </div>
     <div formGroupName="passwordGroup">
         <div> 密码：<input type="password" formControlName="password"/></div>
         <div [hidden] = "!formModel.hasError('minlength', ['passwordGroup', 'password'])" style=" color: red;font-size: 0.5em;">password 的长度必须要大于6</div>
