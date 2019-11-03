@@ -5,12 +5,12 @@
     <div [hidden] = "!formModel.hasError('required', 'username')" style=" color: red;font-size: 0.5em;">username 是必填项</div>
     <div [hidden] = "!formModel.hasError('minlength', 'username')" style=" color: red;font-size: 0.5em;">username 的长度必须要大于6</div>
     <div> 手机号：<input type="text" formControlName="phone"/></div>
-    <div [hidden] = "!formModel.hasError('mobileValid', 'phone')" style=" color: red;font-size: 0.5em;">phone 一定要符合标准</div>
+    <div [hidden] = "!formModel.hasError('mobileValid', 'phone')" style=" color: red;font-size: 0.5em;">{{formModel.getError('mobileValid', 'phone')?.msg}}</div>
     <div formGroupName="passwordGroup">
         <div> 密码：<input type="password" formControlName="password"/></div>
         <div [hidden] = "!formModel.hasError('minlength', ['passwordGroup', 'password'])" style=" color: red;font-size: 0.5em;">password 的长度必须要大于6</div>
         <div> 确认密码：<input type="password" formControlName="confirmPassword"/></div>
     </div>
-    <div [hidden] = "!formModel.hasError('passwordGroup', 'passwordGroup')" style=" color: red;font-size: 0.5em;">password需要一致</div>
+    <div [hidden] = "!formModel.hasError('passwordGroup', 'passwordGroup')" style=" color: red;font-size: 0.5em;">{{formModel.getError('passwordGroup', 'passwordGroup')?.msg}}</div>
     <button type="submit">发送</button>
 </form>
