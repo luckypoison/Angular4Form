@@ -1,11 +1,22 @@
-<form #myForm="ngForm" (ngSubmit)="onSubmit()" >
-    <div> 用户名：<input type="text" #username="ngModel" ngModel name="username" /></div>
-    <div ngModelGroup="detail">
-      <div>微信号：<input type="text" ngModel name="weChatId"/></div>
-      <div> 手机号：<input type="text" ngModel name="phone"/></div>
+<!--加入novalidate指令的目的就是说我们不用html自带的一些校验规则-->
+<form #myForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+    <div> 用户名：<input type="text" required minlength='6' #username="ngModel" ngModel name="username" /></div>
+    <div [hidden]="myForm.form.get('username')?.valid || myForm.form.get('username')?.untouched">
+        <!--hasError方法一共需要填入两个参数，第一个是你检验器返回的结果中的key的名字，而不是校验器的方法名-->
+        <!--第二个参数就是你要监控哪一个参数校验，就是formControlName的名称-->
+        <div [hidden] = "!myForm.form.hasError('required', 'username')" style=" color: red;font-size: 0.5em;">username 是必填项</div>
+        <div [hidden] = "!myForm.form.hasError('minlength', 'username')" style=" color: red;font-size: 0.5em;">username 的长度必须要大于6</div>
     </div>
-    <div> 密码：<input type="password" ngModel name="password" /></div>
-    <div> 确认密码：<input type="password" ngModel name="rePassword" /></div>
+      <div>微信号：<input type="text" ngModel name="weChatId"/></div>
+      <div> 手机号：<input type="text" ngModel name="phone" appPhoneValidate /></div>
+    <div [hidden]="myForm.form.get('phone')?.valid || myForm.form.get('phone')?.untouched">
+        <div [hidden] = "!myForm.form.hasError('mobileValid', 'phone')" style=" color: red;font-size: 0.5em;">{{myForm.form.getError('mobileValid', 'phone')?.msg}}</div>
+    </div>
+    <div ngModelGroup="passwordGroup" appPasswordValidate>
+      <div> 密码：<input type="password" ngModel name="password" /></div>
+      <div> 确认密码：<input type="password" ngModel name="confirmPassword" /></div>
+    </div>
+    <div [hidden] = "!myForm.form.hasError('passwordGroup', 'passwordGroup')" style=" color: red;font-size: 0.5em;">{{myForm.form.getError('passwordGroup', 'passwordGroup')?.msg}}</div>
     <button type="submit">发送</button>
 </form>
 <div>

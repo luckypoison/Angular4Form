@@ -5,13 +5,17 @@ import { AppComponent } from './app.component';
 import { TemplateComponentComponent } from './template-component/template-component.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { ReactiveRegisterComponent } from './reactive-register/reactive-register.component';
+import { PhoneValidateDirective } from './directive/phone-validate.directive';
+import { PasswordValidateDirective } from './directive/password-validate.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     TemplateComponentComponent,
     ReactiveFormComponent,
-    ReactiveRegisterComponent
+    ReactiveRegisterComponent,
+    PhoneValidateDirective,
+    PasswordValidateDirective
   ],
   imports: [
     BrowserModule,
