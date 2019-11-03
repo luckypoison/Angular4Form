@@ -19,7 +19,7 @@ export class ReactiveRegisterComponent implements OnInit {
         username: ['', [Validators.required, Validators.minLength(6)]],
         phone: ['', [validatePhone]],
         passwordGroup: fb.group({
-          password: [''],
+          password: ['', [Validators.minLength(6)]],
           confirmPassword: ['']
         }, {validator: validatePasswordGroup})
     });

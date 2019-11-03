@@ -7,7 +7,7 @@ export function validatePhone(control: FormControl) {
     let valid = phoneReg.test(control.value);
     console.log(valid);
     //如果合法返回空，如果不合法返回一个json对象
-    return valid ? null : {mobileValid: false};
+    return valid ? null : {mobileValid: true};
   }
 
   //下面是一个验证controlGroup的例子
@@ -16,5 +16,5 @@ export function validatePhone(control: FormControl) {
     let confirmPassword = group.get('confirmPassword') as FormControl;
     let valid = (password.value === confirmPassword.value);
     console.log('两个密码相同：' + valid);
-    return valid ? null : {passwordGroup: false};
+    return valid ? null : {passwordGroup: true};
   }
